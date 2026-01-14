@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2026-01-14 mer 21:19 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Plotting data with Emacs Calc</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" type="text/css" href="../simple.css" />
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Plotting data with Emacs Calc</h1>
+<div id="outline-container-org1015ac2" class="outline-2">
+<h2 id="org1015ac2"><span class="section-number-2">1.</span> NOTICE</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+In this article I use Emacs notation when talking about shortcuts,
+here the gist of it:
+</p>
+<dl class="org-dl">
+<dt><code>C</code></dt><dd>means Ctrl or Control</dd>
+<dt><code>M</code></dt><dd>means Meta or Alt</dd>
+<dt><code>C-x</code></dt><dd>means pressing Ctrl together with x</dd>
+<dt><code>M-x</code></dt><dd>means pressing Alt and x together</dd>
+<dt><code>g f</code></dt><dd>means pressing g and the pressing f</dd>
+</dl>
+</div>
+</div>
+<div id="outline-container-org6391699" class="outline-2">
+<h2 id="org6391699"><span class="section-number-2">2.</span> How to plot data</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+In this period I'm studying for my Calculus II exam and I happed to
+need the ability to plot functions over arbitrary ranges, sometimes multiple
+functions on the same plot. Thankfully I can use emacs calc to solve this problem.
+</p>
+
+<p>
+For example I recently needed to plot cos(x) to verify a bunch of property to solve a
+integral, so here how we can do that:
+</p>
+<ol class="org-ol">
+<li>Open emacs calc with <code>M-x calc</code> or <code>C-x * *</code></li>
+<li>Add the <i>x</i>, in this case the range on which we want to plot cos(<i>x</i>) with <code>'[0..360] RET</code></li>
+<li>Add the <i>y</i>, in this case it will the math formulae cos(<i>x</i>), with: <code>'cos(x) RET</code></li>
+<li>Now we plot with <code>g f</code> or <code>M-x calc-graph-fast</code></li>
+</ol>
+
+<p>
+Here what we get:
+<img src="../images/cos_degree_plot.png" alt="cos_degree_plot.png" />
+</p>
+
+<p>
+Now if know you something about math is that angle are usually measured in radians
+and not degrees, to make this happens we can use the command <code>calc-radians-mode</code> or
+<code>m r</code> before we add the /x/s onto the stack:
+</p>
+<ol class="org-ol">
+<li>&#x2026;</li>
+<li>Set radians mode with <code>m r</code></li>
+<li>Add the /x/s like this <code>'[-pi .. pi]</code></li>
+<li>Add the <i>y</i></li>
+<li>Plot with <code>g f</code></li>
+</ol>
+
+<p>
+Here what we get:
+<img src="../images/cos_radians_plot.png" alt="cos_radians_plot.png" />
+</p>
+</div>
+</div>
+<div id="outline-container-org4357c75" class="outline-2">
+<h2 id="org4357c75"><span class="section-number-2">3.</span> Plotting on Wayland</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+If you aren't on X11 you have noticed that the plot is shown not as an
+image but is drawn as text, this happen because if emacs doesn't see
+the environmental variable <code>DISPLAY</code> set it will default to the "dumb"
+device and will draw the graph in a way that can be displayed in a
+POSIX terminal. To solve this you can set the device to something like
+<code>png</code>, <code>gif</code> or any other "<a href="http://gnuplot.info/docs/Terminals.html">GnuPlot terminal</a>" with <code>calc-graph-device</code> or <code>g D</code>
+and set the output filename to something like "plot.png" with <code>g O</code> or
+with <code>calc-graph-output</code>.
+</p>
+
+<p>
+I personally set calc-graph-device to <code>png</code> and the output filename to
+<code>func-name_plot.png</code>
+</p>
+</div>
+</div>
+<div id="outline-container-org88a7853" class="outline-2">
+<h2 id="org88a7853"><span class="section-number-2">4.</span> Conclusion</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+If this small article made you curios about Calc I advise you to read
+the info manual, which you can access directly in Emacs with <code>C-H i m
+Calc RET</code>
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 2026-01-14 mer 21:19</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
